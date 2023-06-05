@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -22,7 +22,6 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'email_verified_at',
     ];
 
     /**
@@ -44,9 +43,4 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function canAccessFilament(): bool
-    {
-        return $this->email == 'pravin@gmail.com' && $this->hasVerifiedEmail();
-    }
 }
